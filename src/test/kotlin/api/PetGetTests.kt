@@ -1,6 +1,7 @@
 package api
 
 import com.cybercube.api.config.givenRestClient
+import com.cybercube.api.dto.ErrorDto
 import com.cybercube.api.dto.PetDto
 import com.cybercube.api.dto.givenPetExists
 import io.github.serpro69.kfaker.Faker
@@ -38,5 +39,21 @@ class PetGetTests {
 
         assertEquals(200, response.status.value)
         assertEquals(expectedPet, actualPet)
+    }
+
+    @Test
+    fun `error is thrown if pet is accessed by non-existent id`() = runBlocking {
+        val fakeId = 0L
+        val expectedError = ErrorDto(
+            code = 1,
+            type = "error",
+            message = "Pet not found"
+        )
+
+        val response = client.get("pet/$fakeId")
+        val actualError: ErrorDto = response.body()
+
+        assertEquals(404, response.status.value)
+        assertEquals(expectedError, actualError)
     }
 }
