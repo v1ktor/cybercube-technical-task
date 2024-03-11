@@ -32,7 +32,7 @@ class RestClient {
             }
         }
 
-        return client;
+        return client
     }
 }
 
