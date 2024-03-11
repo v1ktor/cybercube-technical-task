@@ -11,6 +11,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class PetCreateTests {
@@ -43,5 +44,29 @@ class PetCreateTests {
             .usingRecursiveComparison()
             .ignoringFields("id")
             .isEqualTo(expectedPet);
+    }
+
+    @Test
+    @Disabled("The documentation says that the name is required, but the server does not enforce it. Possible bug.")
+    fun `pet without name cannot be added to the store`() = runBlocking {
+        expectedPet.name = null
+
+        val response = client.post("pet") {
+            setBody(expectedPet);
+        }
+
+        assertEquals(400, response.status.value)
+    }
+
+    @Test
+    @Disabled("The documentation says that the photoUrls is required, but the server does not enforce it. Possible bug.")
+    fun `pet without photos cannot be added to the store`() = runBlocking {
+        expectedPet.photoUrls = null
+
+        val response = client.post("pet") {
+            setBody(expectedPet);
+        }
+
+        assertEquals(400, response.status.value)
     }
 }

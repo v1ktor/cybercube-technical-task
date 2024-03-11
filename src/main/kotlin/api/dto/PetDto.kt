@@ -8,7 +8,7 @@ data class PetDto(
     var id: Long? = null,
     var category: PetCategory? = PetCategory(),
     var name: String? = null,
-    var photoUrls: ArrayList<String> = arrayListOf(),
+    var photoUrls: ArrayList<String>? = arrayListOf(),
     var tags: ArrayList<PetTags> = arrayListOf(),
     var status: PetStatus? = null
 )
