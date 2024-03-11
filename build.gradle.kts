@@ -1,3 +1,8 @@
+val ktor_version: String by project
+val kotlinx_version: String by project
+val logback_version: String by project
+val junit_version: String by project
+
 plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.serialization") version "1.9.23"
@@ -11,16 +16,16 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "2.3.9"
-
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-    implementation("io.ktor:ktor-client-core:${ktorVersion}")
-    implementation("io.ktor:ktor-client-logging:${ktorVersion}")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
-    implementation("io.ktor:ktor-client-apache5:${ktorVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${kotlinx_version}")
+    implementation("io.ktor:ktor-client-core:${ktor_version}")
+    implementation("io.ktor:ktor-client-cio:${ktor_version}")
+    implementation("io.ktor:ktor-client-logging:${ktor_version}")
+    implementation("io.ktor:ktor-client-content-negotiation:${ktor_version}")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:${ktor_version}")
+    implementation("ch.qos.logback:logback-classic:${logback_version}")
 
-    testImplementation(platform("org.junit:junit-bom:5.10.2"))
+    testImplementation(platform("org.junit:junit-bom:${junit_version}"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -29,6 +34,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(21)
 }
