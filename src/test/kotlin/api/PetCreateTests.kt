@@ -1,6 +1,7 @@
 package api
 
 import com.cybercube.api.config.givenRestClient
+import com.cybercube.api.dto.ErrorDto
 import com.cybercube.api.dto.PetDto
 import com.cybercube.api.dto.givenPetForCreate
 import io.github.serpro69.kfaker.Faker
@@ -32,7 +33,7 @@ class PetCreateTests {
     }
 
     @Test
-    fun `add new pet to the store`(): Unit = runBlocking {
+    fun `pet can be added to the store`(): Unit = runBlocking {
         val response = client.post("pet") {
             setBody(expectedPet)
         }
@@ -68,5 +69,20 @@ class PetCreateTests {
         }
 
         assertEquals(400, response.status.value)
+    }
+
+    @Test
+    fun `pet cannot be added without data`() = runBlocking {
+        val expectedError = ErrorDto(
+            code = 405,
+            type = "unknown",
+            message = "no data"
+        )
+
+        val response = client.post("pet")
+        val actualError: ErrorDto = response.body()
+
+        assertEquals(405, response.status.value)
+        assertEquals(expectedError, actualError)
     }
 }
