@@ -1,9 +1,9 @@
 package api
 
-import com.cybercube.api.config.givenRestClient
-import com.cybercube.api.dto.ErrorDto
-import com.cybercube.api.dto.PetDto
-import com.cybercube.api.dto.givenPetExists
+import api.config.givenRestClient
+import api.dto.ErrorDto
+import api.dto.PetDto
+import api.dto.givenPetExists
 import io.github.serpro69.kfaker.Faker
 import io.ktor.client.call.*
 import io.ktor.client.request.*

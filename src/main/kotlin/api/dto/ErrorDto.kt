@@ -1,4 +1,4 @@
-package com.cybercube.api.dto
+package api.dto
 
 import kotlinx.serialization.Serializable
 

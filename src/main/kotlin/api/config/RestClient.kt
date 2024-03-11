@@ -1,4 +1,4 @@
-package com.cybercube.api.config
+package api.config
 
 import io.ktor.client.*
 import io.ktor.client.plugins.*

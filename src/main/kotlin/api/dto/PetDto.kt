@@ -1,6 +1,6 @@
-package com.cybercube.api.dto
+package api.dto
 
-import com.cybercube.api.config.givenRestClient
+import api.config.givenRestClient
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.runBlocking
