@@ -1,5 +1,9 @@
 package com.cybercube.api.dto
 
+import com.cybercube.api.config.givenRestClient
+import io.ktor.client.call.*
+import io.ktor.client.request.*
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -53,4 +57,17 @@ fun givenPetForCreate(name: String): PetDto {
         tags = arrayListOf(giverPetTags()),
         status = PetStatus.AVAILABLE
     )
+}
+
+fun givenPetExists(name: String): PetDto {
+    val client = givenRestClient()
+    val pet = givenPetForCreate(name)
+
+    val createdPet: PetDto = runBlocking {
+        client.post("pet") {
+            setBody(pet)
+        }.body()
+    }
+
+    return createdPet
 }
