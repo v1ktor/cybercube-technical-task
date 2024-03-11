@@ -13,7 +13,7 @@ data class PetDto(
     var category: PetCategory? = PetCategory(),
     var name: String? = null,
     var photoUrls: ArrayList<String>? = arrayListOf(),
-    var tags: ArrayList<PetTags> = arrayListOf(),
+    var tags: ArrayList<PetTag> = arrayListOf(),
     var status: PetStatus? = null
 )
 
@@ -24,7 +24,7 @@ data class PetCategory(
 )
 
 @Serializable
-data class PetTags(
+data class PetTag(
     var id: Int? = null,
     var name: String? = null
 )
@@ -45,8 +45,8 @@ fun givenPetCategory(): PetCategory {
     return PetCategory(1, "dogs")
 }
 
-fun giverPetTags(): PetTags {
-    return PetTags(1, "friendly")
+fun giverPetTags(): PetTag {
+    return PetTag(1, "friendly")
 }
 
 fun givenPetForCreate(name: String): PetDto {
