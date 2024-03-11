@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class PetCreateTests {
-    private lateinit var expectedPet: PetDto;
+    private lateinit var expectedPet: PetDto
 
     private val client = givenRestClient()
     private val faker = Faker()
@@ -34,7 +34,7 @@ class PetCreateTests {
     @Test
     fun `add new pet to the store`(): Unit = runBlocking {
         val response = client.post("pet") {
-            setBody(expectedPet);
+            setBody(expectedPet)
         }
 
         val actualPet: PetDto = response.body()
@@ -43,7 +43,7 @@ class PetCreateTests {
         assertThat(actualPet)
             .usingRecursiveComparison()
             .ignoringFields("id")
-            .isEqualTo(expectedPet);
+            .isEqualTo(expectedPet)
     }
 
     @Test
@@ -52,7 +52,7 @@ class PetCreateTests {
         expectedPet.name = null
 
         val response = client.post("pet") {
-            setBody(expectedPet);
+            setBody(expectedPet)
         }
 
         assertEquals(400, response.status.value)
@@ -64,7 +64,7 @@ class PetCreateTests {
         expectedPet.photoUrls = null
 
         val response = client.post("pet") {
-            setBody(expectedPet);
+            setBody(expectedPet)
         }
 
         assertEquals(400, response.status.value)
