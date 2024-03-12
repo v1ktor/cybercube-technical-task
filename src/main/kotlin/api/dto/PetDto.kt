@@ -45,8 +45,8 @@ fun givenPetCategory(): PetCategory {
     return PetCategory(1, "dogs")
 }
 
-fun giverPetTag(): PetTag {
-    return PetTag(1, "friendly")
+fun giverPetTag(id: Int = 1, name: String = "friendly"): PetTag {
+    return PetTag(id, name)
 }
 
 fun givenPetForCreate(name: String, status: PetStatus = PetStatus.AVAILABLE): PetDto {
