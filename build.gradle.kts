@@ -4,6 +4,7 @@ val logback_version: String by project
 val junit_version: String by project
 val faker_version: String by project
 val assertj_version: String by project
+val selenide_version: String by project
 
 plugins {
     kotlin("jvm") version "1.9.22"
@@ -31,6 +32,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:$junit_version"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core:$assertj_version")
+    testImplementation("com.codeborne:selenide:$selenide_version")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
