@@ -23,12 +23,12 @@ class PetFindByStatusTests {
     private val petStatus = PetStatus.SOLD
 
     @BeforeEach
-    fun beforeEach() = runBlocking {
+    fun beforeEach() {
         expectedPet = givenPetExists(petName, petStatus)
     }
 
     @AfterEach
-    fun afterEach() = runBlocking {
+    fun afterEach() {
         client.close()
     }
 

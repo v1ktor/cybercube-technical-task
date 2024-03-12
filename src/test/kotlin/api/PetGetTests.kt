@@ -21,12 +21,12 @@ class PetGetTests {
     private val petName = faker.random.nextUUID()
 
     @BeforeEach
-    fun beforeEach() = runBlocking {
+    fun beforeEach() {
         expectedPet = givenPetExists(petName)
     }
 
     @AfterEach
-    fun afterEach() = runBlocking {
+    fun afterEach() {
         client.close()
     }
 

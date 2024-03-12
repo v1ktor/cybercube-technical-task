@@ -28,7 +28,7 @@ class PetCreateTests {
     }
 
     @AfterEach
-    fun afterEach() = runBlocking {
+    fun afterEach() {
         client.close()
     }
 
