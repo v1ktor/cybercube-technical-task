@@ -49,19 +49,19 @@ fun giverPetTag(): PetTag {
     return PetTag(1, "friendly")
 }
 
-fun givenPetForCreate(name: String): PetDto {
+fun givenPetForCreate(name: String, status: PetStatus = PetStatus.AVAILABLE): PetDto {
     return PetDto(
         category = givenPetCategory(),
         name = name,
         photoUrls = arrayListOf("photoUrl"),
         tags = arrayListOf(giverPetTag()),
-        status = PetStatus.AVAILABLE
+        status = status
     )
 }
 
-fun givenPetExists(name: String): PetDto {
+fun givenPetExists(name: String, status: PetStatus = PetStatus.AVAILABLE): PetDto {
     val client = givenRestClient()
-    val pet = givenPetForCreate(name)
+    val pet = givenPetForCreate(name, status)
 
     val createdPet: PetDto = runBlocking {
         client.post("pet") {
