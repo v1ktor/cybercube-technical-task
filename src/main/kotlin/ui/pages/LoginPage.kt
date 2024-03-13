@@ -13,6 +13,10 @@ class LoginPage(private val page: Page, private val browserContext: BrowserConte
 
     val messageError: Locator = page.locator("[data-test=error]")
 
+    fun navigateTo() {
+        page.navigate("/")
+    }
+
     fun fillLoginForm(userName: String, password: String) {
         fieldUsername.fill(userName)
         fieldPassword.fill(password)

@@ -1,7 +1,7 @@
 package ui
 
-import com.microsoft.playwright.Page
 import com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.params.ParameterizedTest
@@ -12,16 +12,21 @@ import ui.pages.LoginPage
 
 @ExtendWith(PlaywrightExtension::class)
 class LoginTests {
+
+    @BeforeEach
+    fun beforeEach() {
+        val loginPage = LoginPage(PlaywrightExtension.getPage(), PlaywrightExtension.getContext())
+
+        loginPage.navigateTo()
+    }
+
     @ParameterizedTest
     @ValueSource(strings = ["standard_user", "problem_user", "performance_glitch_user", "error_user", "visual_user"])
     fun `user can login with valid credentials`(
         user: String,
-        page: Page,
         loginPage: LoginPage,
         inventoryPage: InventoryPage
     ) {
-        page.navigate("/")
-
         loginPage.fillLoginForm(user, "secret_sauce")
         loginPage.clickLoginButton()
 
@@ -29,9 +34,7 @@ class LoginTests {
     }
 
     @Test
-    fun `user will receive an error if he is locked out`(page: Page, loginPage: LoginPage) {
-        page.navigate("/")
-
+    fun `user will receive an error if he is locked out`(loginPage: LoginPage) {
         loginPage.fillLoginForm("locked_out_user", "secret_sauce")
         loginPage.clickLoginButton()
 
@@ -39,9 +42,7 @@ class LoginTests {
     }
 
     @Test
-    fun `user will receive an error if he enters invalid credentials`(page: Page, loginPage: LoginPage) {
-        page.navigate("/")
-
+    fun `user will receive an error if he enters invalid credentials`(loginPage: LoginPage) {
         loginPage.fillLoginForm("invalid_user", "invalid_password")
         loginPage.clickLoginButton()
 
