@@ -4,7 +4,7 @@ val logback_version: String by project
 val junit_version: String by project
 val faker_version: String by project
 val assertj_version: String by project
-val selenide_version: String by project
+val playwright_version: String by project
 
 plugins {
     kotlin("jvm") version "1.9.22"
@@ -28,11 +28,12 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.github.serpro69:kotlin-faker:$faker_version")
+    implementation("com.microsoft.playwright:playwright:$playwright_version")
 
-    testImplementation(platform("org.junit:junit-bom:$junit_version"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation(platform("org.junit:junit-bom:$junit_version"))
+    implementation("org.junit.jupiter:junit-jupiter")
+
     testImplementation("org.assertj:assertj-core:$assertj_version")
-    testImplementation("com.codeborne:selenide:$selenide_version")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
