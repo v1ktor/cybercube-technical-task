@@ -3,6 +3,8 @@ package ui.config
 import com.microsoft.playwright.*
 import com.microsoft.playwright.Tracing.StopOptions
 import org.junit.jupiter.api.extension.*
+import ui.pages.InventoryPage
+import ui.pages.LoginPage
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -13,8 +15,9 @@ class PlaywrightExtension : BeforeAllCallback, AfterAllCallback, BeforeEachCallb
         private lateinit var browser: Browser
 
         private val browserContextThreadLocal = ThreadLocal<BrowserContext>()
+        private val pageThreadLocal = ThreadLocal<Page>()
 
-        fun getPage(): Page = browserContextThreadLocal.get().newPage()
+        fun getPage(): Page = pageThreadLocal.get()
         fun getContext(): BrowserContext = browserContextThreadLocal.get()
     }
 
@@ -35,6 +38,9 @@ class PlaywrightExtension : BeforeAllCallback, AfterAllCallback, BeforeEachCallb
                 .setSnapshots(true)
                 .setSources(true)
         )
+
+        val page = browserContext.newPage()
+        pageThreadLocal.set(page)
     }
 
     override fun afterAll(context: ExtensionContext?) {
@@ -60,19 +66,27 @@ class PlaywrightExtension : BeforeAllCallback, AfterAllCallback, BeforeEachCallb
     }
 
     private fun cleanUp() {
+        pageThreadLocal.get().close()
+        pageThreadLocal.remove()
+
         browserContextThreadLocal.get().close()
         browserContextThreadLocal.remove()
     }
 
     override fun supportsParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext): Boolean {
         val type = parameterContext.parameter.type
-        return type == Page::class.java || type == BrowserContext::class.java
+        return type == Page::class.java
+                || type == BrowserContext::class.java
+                || type == LoginPage::class.java
+                || type == InventoryPage::class.java
     }
 
     override fun resolveParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext): Any {
         return when (val type = parameterContext.parameter.type) {
             Page::class.java -> getPage()
             BrowserContext::class.java -> getContext()
+            LoginPage::class.java -> LoginPage(getPage(), getContext())
+            InventoryPage::class.java -> InventoryPage(getPage())
             else -> throw ParameterResolutionException("Can't resolve parameter of type $type")
         }
     }
