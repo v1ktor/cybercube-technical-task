@@ -5,7 +5,7 @@ import com.microsoft.playwright.Page
 import com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat
 import ui.data.Product
 
-class InventoryPage(private val page: Page) {
+class InventoryPage(page: Page) {
     private val buttonAddToCartBackpack: Locator = page.locator("button[data-test='add-to-cart-sauce-labs-backpack']")
     private val buttonAddToCartBikeLight: Locator =
         page.locator("button[data-test='add-to-cart-sauce-labs-bike-light']")
@@ -21,11 +21,7 @@ class InventoryPage(private val page: Page) {
     private val shoppingCartLink: Locator = page.locator("a[class='shopping_cart_link']")
 
     private val textTitle: Locator = page.locator(".header_secondary_container > .title")
-
-    fun navigateTo() {
-        page.navigate("/inventory.html")
-    }
-
+    
     fun addToCart(products: List<Product>) {
         products.forEach {
             when (it) {
