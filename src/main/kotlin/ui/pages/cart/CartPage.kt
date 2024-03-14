@@ -8,7 +8,6 @@ import ui.data.Product
 
 class CartPage(page: Page) {
     private val buttonCheckout: Locator = page.locator("button[data-test='checkout']")
-    private val buttonContinueShopping: Locator = page.locator("button[data-test='continue-shopping']")
 
     private val itemInTheCart: Locator = page.locator("div[class='cart_item']")
     private val itemTitle: Locator = page.locator("div[class='cart_item_label'] a")
