@@ -40,6 +40,33 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
+tasks.register<Test>("testApi") {
+    useJUnitPlatform()
+    include("**/api/**")
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
+tasks.register<Test>("testUi") {
+    useJUnitPlatform()
+    include("**/ui/**")
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
+tasks.register<Test>("testUnit") {
+    useJUnitPlatform()
+    include("**/utils/**")
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
 
 kotlin {
