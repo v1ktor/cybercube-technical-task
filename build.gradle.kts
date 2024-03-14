@@ -9,6 +9,7 @@ val playwright_version: String by project
 plugins {
     kotlin("jvm") version "1.9.22"
     kotlin("plugin.serialization") version "1.9.23"
+    id("com.adarshr.test-logger") version "4.0.0"
 }
 
 group = "com.cybercube"
@@ -40,33 +41,24 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
-    }
 }
 
 tasks.register<Test>("testApi") {
     useJUnitPlatform()
     include("**/api/**")
-    testLogging {
-        events("passed", "skipped", "failed")
-    }
+    outputs.upToDateWhen { false }
 }
 
 tasks.register<Test>("testUi") {
     useJUnitPlatform()
     include("**/ui/**")
-    testLogging {
-        events("passed", "skipped", "failed")
-    }
+    outputs.upToDateWhen { false }
 }
 
 tasks.register<Test>("testUnit") {
     useJUnitPlatform()
     include("**/utils/**")
-    testLogging {
-        events("passed", "skipped", "failed")
-    }
+    outputs.upToDateWhen { false }
 }
 
 kotlin {
