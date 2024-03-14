@@ -1,4 +1,4 @@
-package ui.pages
+package ui.pages.login
 
 import com.microsoft.playwright.BrowserContext
 import com.microsoft.playwright.Locator

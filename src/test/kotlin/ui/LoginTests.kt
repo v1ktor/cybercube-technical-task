@@ -7,8 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import ui.config.PlaywrightExtension
-import ui.pages.InventoryPage
-import ui.pages.LoginPage
+import ui.pages.inventory.InventoryPage
+import ui.pages.login.LoginPage
 
 @ExtendWith(PlaywrightExtension::class)
 class LoginTests {
@@ -30,7 +30,7 @@ class LoginTests {
         loginPage.fillLoginForm(user, "secret_sauce")
         loginPage.clickLoginButton()
 
-        assertThat(inventoryPage.headerSecondary).hasText("Products")
+        inventoryPage.validateTitle()
     }
 
     @Test

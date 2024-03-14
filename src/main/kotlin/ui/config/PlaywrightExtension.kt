@@ -3,8 +3,10 @@ package ui.config
 import com.microsoft.playwright.*
 import com.microsoft.playwright.Tracing.StopOptions
 import org.junit.jupiter.api.extension.*
-import ui.pages.InventoryPage
-import ui.pages.LoginPage
+import ui.pages.cart.CartPage
+import ui.pages.checkout.CheckoutPage
+import ui.pages.inventory.InventoryPage
+import ui.pages.login.LoginPage
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -79,6 +81,8 @@ class PlaywrightExtension : BeforeAllCallback, AfterAllCallback, BeforeEachCallb
                 || type == BrowserContext::class.java
                 || type == LoginPage::class.java
                 || type == InventoryPage::class.java
+                || type == CartPage::class.java
+                || type == CheckoutPage::class.java
     }
 
     override fun resolveParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext): Any {
@@ -87,6 +91,8 @@ class PlaywrightExtension : BeforeAllCallback, AfterAllCallback, BeforeEachCallb
             BrowserContext::class.java -> getContext()
             LoginPage::class.java -> LoginPage(getPage(), getContext())
             InventoryPage::class.java -> InventoryPage(getPage())
+            CartPage::class.java -> CartPage(getPage())
+            CheckoutPage::class.java -> CheckoutPage(getPage())
             else -> throw ParameterResolutionException("Can't resolve parameter of type $type")
         }
     }
