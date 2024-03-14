@@ -51,8 +51,9 @@ class PlaywrightExtension : BeforeAllCallback, AfterAllCallback, BeforeEachCallb
 
     override fun testFailed(context: ExtensionContext, cause: Throwable?) {
         val browserContext: BrowserContext = browserContextThreadLocal.get()
+        val traceName = context.requiredTestMethod.name.replace(" ", "-")
 
-        val tracePath = Paths.get("build/traces/${context.requiredTestMethod.name}-${System.currentTimeMillis()}.zip")
+        val tracePath = Paths.get("build/traces/${traceName}-${System.currentTimeMillis()}.zip")
         Files.createDirectories(tracePath.parent)
 
         browserContext.tracing().stop(StopOptions().setPath(tracePath))
