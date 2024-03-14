@@ -20,7 +20,7 @@ class PlaywrightExtension : BeforeAllCallback, AfterAllCallback, BeforeEachCallb
         private val pageThreadLocal = ThreadLocal<Page>()
 
         fun getPage(): Page = pageThreadLocal.get()
-        fun getContext(): BrowserContext = browserContextThreadLocal.get()
+        fun getBrowserContext(): BrowserContext = browserContextThreadLocal.get()
     }
 
     override fun beforeAll(context: ExtensionContext?) {
@@ -88,8 +88,8 @@ class PlaywrightExtension : BeforeAllCallback, AfterAllCallback, BeforeEachCallb
     override fun resolveParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext): Any {
         return when (val type = parameterContext.parameter.type) {
             Page::class.java -> getPage()
-            BrowserContext::class.java -> getContext()
-            LoginPage::class.java -> LoginPage(getPage(), getContext())
+            BrowserContext::class.java -> getBrowserContext()
+            LoginPage::class.java -> LoginPage(getPage(), getBrowserContext())
             InventoryPage::class.java -> InventoryPage(getPage())
             CartPage::class.java -> CartPage(getPage())
             CheckoutPage::class.java -> CheckoutPage(getPage())

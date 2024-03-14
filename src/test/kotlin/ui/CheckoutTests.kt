@@ -16,7 +16,7 @@ class CheckoutTests {
 
     @BeforeEach
     fun beforeEach() {
-        val loginPage = LoginPage(PlaywrightExtension.getPage(), PlaywrightExtension.getContext())
+        val loginPage = LoginPage(PlaywrightExtension.getPage(), PlaywrightExtension.getBrowserContext())
 
         loginPage.loginAs(User.STANDARD_USER)
     }

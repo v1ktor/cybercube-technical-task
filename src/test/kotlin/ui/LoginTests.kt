@@ -15,7 +15,7 @@ class LoginTests {
 
     @BeforeEach
     fun beforeEach() {
-        val loginPage = LoginPage(PlaywrightExtension.getPage(), PlaywrightExtension.getContext())
+        val loginPage = LoginPage(PlaywrightExtension.getPage(), PlaywrightExtension.getBrowserContext())
 
         loginPage.navigateTo()
     }
