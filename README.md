@@ -18,7 +18,8 @@ in `src/main/kotlin/ui/config/BrowserConfig.kt`.
 
 # Test Results
 
-Test results will be available in the build directory of the project: `%rootDir%/build/reports/tests/test/index.html`.
+Test results will be available in console and in the build directory of the
+project: `%rootDir%/build/reports/tests/test/index.html`.
 
 For failed UI tests, the trace will be generated and saved in `%rootDir%/build/traces/` folder. The trace can be viewed
 on https://trace.playwright.dev/ by uploading .zip file.
