@@ -1,6 +1,5 @@
 package ui
 
-import com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -38,7 +37,7 @@ class LoginTests {
         loginPage.fillLoginForm("locked_out_user", "secret_sauce")
         loginPage.clickLoginButton()
 
-        assertThat(loginPage.messageError).hasText("Epic sadface: Sorry, this user has been locked out.")
+        loginPage.validateErrorMessage("Epic sadface: Sorry, this user has been locked out.")
     }
 
     @Test
@@ -46,6 +45,6 @@ class LoginTests {
         loginPage.fillLoginForm("invalid_user", "invalid_password")
         loginPage.clickLoginButton()
 
-        assertThat(loginPage.messageError).hasText("Epic sadface: Username and password do not match any user in this service")
+        loginPage.validateErrorMessage("Epic sadface: Username and password do not match any user in this service")
     }
 }

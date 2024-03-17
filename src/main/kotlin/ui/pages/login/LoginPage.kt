@@ -3,6 +3,7 @@ package ui.pages.login
 import com.microsoft.playwright.BrowserContext
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
+import com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat
 import com.microsoft.playwright.options.Cookie
 
 class LoginPage(private val page: Page, private val browserContext: BrowserContext) {
@@ -11,7 +12,7 @@ class LoginPage(private val page: Page, private val browserContext: BrowserConte
 
     private val buttonLogin: Locator = page.locator("#login-button")
 
-    val messageError: Locator = page.locator("[data-test=error]")
+    private val messageError: Locator = page.locator("[data-test=error]")
 
     fun navigateTo() {
         page.navigate("/")
@@ -44,6 +45,10 @@ class LoginPage(private val page: Page, private val browserContext: BrowserConte
         )
 
         page.navigate("/inventory.html")
+    }
+
+    fun validateErrorMessage(expectedMessage: String) {
+        assertThat(messageError).hasText(expectedMessage)
     }
 }
 
