@@ -64,3 +64,9 @@ tasks.register<Test>("testUnit") {
 kotlin {
     jvmToolchain(21)
 }
+
+tasks.withType<Test> {
+    if (project.hasProperty("browser")){
+        systemProperty("browser", project.property("browser").toString())
+    }
+}
