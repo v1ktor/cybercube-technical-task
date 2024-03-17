@@ -23,7 +23,7 @@ object BrowserConfig {
         val browserType = init()
 
         val launchOptions = BrowserType.LaunchOptions()
-            .setHeadless(false)
+            .setHeadless(true)
 
         val browser = when (browserType.lowercase()) {
             Browsers.WEBKIT.engine -> playwright.webkit().launch(launchOptions)
