@@ -53,16 +53,14 @@ class PetUpdateTests {
     }
 
     @Test
-    fun `new pet is created if trying to update non-existing pet`() = runBlocking {
+    fun `404 should be thrown if pet cannot be found`() = runBlocking {
         val fakeId = 0L
         val expectedPet = existingPet.copy(id = fakeId)
 
         val response = client.put("pet") {
             setBody(expectedPet)
         }
-        val actualPet: PetDto = response.body()
 
-        assertEquals(200, response.status.value)
-        assertNotEquals(existingPet.id, actualPet.id)
+        assertEquals(404, response.status.value)
     }
 }
