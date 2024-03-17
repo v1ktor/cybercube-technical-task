@@ -46,19 +46,16 @@ tasks.test {
 tasks.register<Test>("testApi") {
     useJUnitPlatform()
     include("**/api/**")
-    outputs.upToDateWhen { false }
 }
 
 tasks.register<Test>("testUi") {
     useJUnitPlatform()
     include("**/ui/**")
-    outputs.upToDateWhen { false }
 }
 
 tasks.register<Test>("testUnit") {
     useJUnitPlatform()
     include("**/utils/**")
-    outputs.upToDateWhen { false }
 }
 
 kotlin {
@@ -66,7 +63,7 @@ kotlin {
 }
 
 tasks.withType<Test> {
-    if (project.hasProperty("browser")){
+    if (project.hasProperty("browser")) {
         systemProperty("browser", project.property("browser").toString())
     }
 }
