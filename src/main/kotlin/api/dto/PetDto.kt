@@ -19,13 +19,13 @@ data class PetDto(
 
 @Serializable
 data class PetCategory(
-    var id: Int? = null,
+    var id: Long? = null,
     var name: String? = null
 )
 
 @Serializable
 data class PetTag(
-    var id: Int? = null,
+    var id: Long? = null,
     var name: String? = null
 )
 
@@ -45,7 +45,7 @@ fun givenPetCategory(): PetCategory {
     return PetCategory(1, "dogs")
 }
 
-fun giverPetTag(id: Int = 1, name: String = "friendly"): PetTag {
+fun giverPetTag(id: Long = 1, name: String = "friendly"): PetTag {
     return PetTag(id, name)
 }
 
